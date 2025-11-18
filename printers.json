@@ -1,0 +1,121 @@
+{
+  "printers": [
+    {
+      "partNumber": "ZT61042-T010100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "203 dpi",
+      "printSpeed": "14 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61042-T01A100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "203 dpi",
+      "printSpeed": "14 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth, Wi-Fi",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61042-T110100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "203 dpi",
+      "printSpeed": "14 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "Yes",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61042-T210100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "203 dpi",
+      "printSpeed": "14 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "Yes",
+      "rewind": "Yes"
+    },
+    {
+      "partNumber": "ZT61043-T010100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "300 dpi",
+      "printSpeed": "12 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61043-T110100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "300 dpi",
+      "printSpeed": "12 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "Yes",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61043-T210100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "300 dpi",
+      "printSpeed": "12 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "Yes",
+      "rewind": "Yes"
+    },
+    {
+      "partNumber": "ZT61046-T010100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "600 dpi",
+      "printSpeed": "6 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "No",
+      "rewind": "No"
+    },
+    {
+      "partNumber": "ZT61046-T210100Z",
+      "model": "ZT610",
+      "printMethod": "Thermal Transfer",
+      "resolution": "600 dpi",
+      "printSpeed": "6 in/sec",
+      "maxWidth": "4.09 in",
+      "interface": "USB, Serial, Ethernet, Bluetooth",
+      "display": "LCD Color Touch",
+      "cutter": "No",
+      "peeler": "Yes",
+      "rewind": "Yes"
+    }
+  ]
+}
