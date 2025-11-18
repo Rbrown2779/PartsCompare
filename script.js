@@ -1,122 +1,87 @@
-document
-  .querySelector(".compareButton")
-  .addEventListener("click", compareParts);
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelector(".compareButton")
+    .addEventListener("click", compareParts);
+});
+
+const prettyNames = {
+  model: "Model",
+  printMethod: "Print Method",
+  resolution: "Resolution",
+  printSpeed: "Print Speed",
+  maxWidth: "Max Width",
+  interface: "Interface",
+  display: "Display",
+  cutter: "Cutter",
+  peeler: "Peeler",
+  rewind: "Rewind",
+};
 
 async function compareParts() {
-  // Get input values
+  // Get input values and remove empty ones
   const partNumbers = [
     document.getElementById("part1").value.trim(),
     document.getElementById("part2").value.trim(),
     document.getElementById("part3").value.trim(),
     document.getElementById("part4").value.trim(),
-  ].filter(Boolean); // removes empty ones
+  ].filter(Boolean);
 
-  // Fetch your fake database
-  const response = await fetch("printers.json");
-  const data = await response.json();
+  try {
+    // Fetch the JSON
+    const response = await fetch("printers.json");
+    const data = await response.json();
 
-  // Filter for matching parts
-  const selectedParts = partNumbers.map((num) => data[num]).filter(Boolean);
+    // Find matching parts in the printers array
+    const selectedParts = partNumbers
+      .map((num) => data.printers.find((p) => p.partNumber === num))
+      .filter(Boolean);
 
-  // Clear existing table
-  const tableHeader = document.getElementById("tableHeader");
-  const tableBody = document.getElementById("tableBody");
-  tableHeader.innerHTML = "";
-  tableBody.innerHTML = "";
+    // Clear previous table
+    const tableHeader = document.getElementById("tableHeader");
+    const tableBody = document.getElementById("tableBody");
+    tableHeader.innerHTML = "";
+    tableBody.innerHTML = "";
 
-  if (selectedParts.length === 0) {
-    tableBody.innerHTML =
-      "<tr><td colspan='5'>No matching parts found</td></tr>";
-    return;
-  }
+    if (selectedParts.length === 0) {
+      tableBody.innerHTML =
+        "<tr><td colspan='5'>No matching parts found</td></tr>";
+      return;
+    }
 
-  // Build table headers (part numbers)
-  tableHeader.innerHTML =
-    "<th>Spec</th>" + partNumbers.map((p) => `<th>${p}</th>`).join("");
+    // Build table headers (first column = Spec, others = part numbers)
+    tableHeader.innerHTML =
+      "<th>Spec</th>" +
+      selectedParts.map((p) => `<th>${p.partNumber}</th>`).join("");
 
-  // Get all unique spec keys
-  const specs = Object.keys(selectedParts[0]);
+    // Get all keys (specs) from the first selected part
+    const specs = Object.keys(selectedParts[0]).filter(
+      (k) => k !== "partNumber"
+    );
 
-  specs.forEach((spec) => {
-    const row = document.createElement("tr");
-    const values = selectedParts.map((p) => p[spec]);
-    const allSame = values.every((v) => v === values[0]);
+    specs.forEach((spec) => {
+      const row = document.createElement("tr");
+      const specCell = document.createElement("td");
+      specCell.textContent = prettyNames[spec] || spec;
+      row.appendChild(specCell);
 
-    // Build spec name cell
-    const specCell = document.createElement("td");
-    specCell.textContent = spec;
-    row.appendChild(specCell);
+      const values = selectedParts.map((p) => p[spec]);
+      const allSame = values.every((v) => v === values[0]);
 
-    // Build value cells
-    values.forEach((val) => {
-      const cell = document.createElement("td");
-      cell.textContent = val || "—";
-      if (!allSame) cell.classList.add("highlight");
-      row.appendChild(cell);
+      values.forEach((val) => {
+        const cell = document.createElement("td");
+        cell.textContent = val || "—";
+        if (!allSame) cell.classList.add("highlight"); // optional styling
+        row.appendChild(cell);
+      });
+
+      tableBody.appendChild(row);
     });
-
-    tableBody.appendChild(row);
-  });
-
-  document.querySelector(".compareButton").addEventListener("click", () => {
-    const part1 = document.getElementById("part1").value.trim();
-    const part2 = document.getElementById("part2").value.trim();
-
-    // fetch the JSON file
-    fetch("printers.json")
-      .then((response) => response.json())
-      .then((data) => {
-        const printers = data.printers;
-
-        // find the printer objects that match the part numbers
-        const printer1 = printers.find((p) => p.partNumber === part1);
-        const printer2 = printers.find((p) => p.partNumber === part2);
-
-        if (!printer1 || !printer2) {
-          alert("One or both part numbers not found. Check your input.");
-          return;
-        }
-
-        // build table header
-        const tableHeader = document.getElementById("tableHeader");
-        tableHeader.innerHTML = `
-        <th>Specification</th>
-        <th>${printer1.partNumber}</th>
-        <th>${printer2.partNumber}</th>
-      `;
-
-        // build table body
-        const tableBody = document.getElementById("tableBody");
-        tableBody.innerHTML = "";
-
-        // get all keys except partNumber
-        const keys = Object.keys(printer1).filter(
-          (key) => key !== "partNumber"
-        );
-
-        keys.forEach((key) => {
-          const row = document.createElement("tr");
-          const labelCell = document.createElement("td");
-          labelCell.textContent = key;
-
-          const val1Cell = document.createElement("td");
-          val1Cell.textContent = printer1[key];
-
-          const val2Cell = document.createElement("td");
-          val2Cell.textContent = printer2[key];
-
-          // highlight differences
-          if (printer1[key] !== printer2[key]) {
-            val1Cell.style.backgroundColor = "#ffcccc";
-            val2Cell.style.backgroundColor = "#ffcccc";
-          }
-
-          row.appendChild(labelCell);
-          row.appendChild(val1Cell);
-          row.appendChild(val2Cell);
-          tableBody.appendChild(row);
-        });
-      })
-      .catch((error) => console.error("Error loading JSON:", error));
-  });
+    //scroll to table after its built
+    document
+      .getElementById("comparisonTable")
+      .scrollIntoView({ behavior: "smooth" });
+  } catch (error) {
+    console.error("Error loading JSON:", error);
+    alert("Error loading JSON. Check console for details.");
+  }
 }
