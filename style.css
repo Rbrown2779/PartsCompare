@@ -78,3 +78,27 @@ h1 {
 html {
   scroll-behavior: smooth;
 }
+/* Container to control spacing */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* Inputs and button */
+.compare input {
+  margin: 5px;
+  padding: 8px;
+  width: 180px;
+}
+
+.compare button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Table spacing */
+#comparisonTable {
+  margin-top: 20px;
+}
